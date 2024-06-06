@@ -59,7 +59,7 @@ pipeline {
                 sh "trivy image ${AWS_ECR_REPO_NAME} > trivyimage-frontend-${BUILD_NUMBER}-${BUILD_ID}.txt"
             }
         }
-        tage("ECR Image Pushing") {
+        stage("ECR Image Pushing") {
             steps {
                 script {
                     sh 'aws ecr get-login-password --region ${AWS_DEFAULT_REGION} | docker login --username AWS --password-stdin ${REPOSITORY_URI}'
@@ -86,10 +86,10 @@ pipeline {
                         git push @github.com/${GIT_USER_NAME}/${GIT_REPO_NAME">https://${GITHUB_TOKEN}@github.com/${GIT_USER_NAME}/${GIT_REPO_NAME} HEAD:main
                         '''
                     
-                        }   
-                    }
+                    }   
                 }
             }
         }
     }
+}
 }
